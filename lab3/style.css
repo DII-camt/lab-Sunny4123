@@ -12,9 +12,17 @@
 }
 
 .round-button:hover{
-    background-color: darkred;
+    animation-name: button_hover;
+    animation-duration: 1s;
 }
-
+@keyframes button_hover {
+    from{
+        background-color: 007BFF;
+    }
+    to{
+        background-color: darkred;
+    }
+}
 @media screen and (max-width: 600px) {
     .round-button {
         padding: 10px 20px;
