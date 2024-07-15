@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const vehicles = ['mustang', 'f-150', 'expedition'];
+        const [a, b] = vehicles;
+        console.log(a, b);
+
+        const vehicleOne = {
+            brand: 'Ford',
+            model: 'Mustang',
+            type: 'car',
+            year: 2021,
+            color: 'red'
+        }
+        console.log(vehicleOne.color);
+        console.log(vehicleOne["color"]);
+        console.log(vehicleOne["color "]);
+        const vehicleTwo = {
+            brand: 'Ford',
+            model: 'Mustang',
+            type: 'car',
+            year: 2021,
+            color: 'red'
+        }
+        const { type, color, brand, model } = vehicleTwo;
+        console.log(type, color, brand, model);
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+        console.log(fruits.pop());
+    </script>
+</body>
+
+</html>
