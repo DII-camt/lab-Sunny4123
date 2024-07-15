@@ -20,6 +20,7 @@ let textbox = document.getElementById('textbox');
 let arraytext = [];
 let number = "";
 let resuleArray = [];
+let showText = [];
 let number1 = 0;
 let number2 = 0;
 let first = true;
@@ -27,7 +28,7 @@ const seearray = ()=>{
     console.log(arraytext);
 };
 const updateTextBox = ()=>{
-    let textTemp = arraytext.toString();
+    let textTemp = showText.toString();
     let textnew = textTemp.replaceAll(",", "");
     textbox.value = textnew;
 };
@@ -42,87 +43,104 @@ const test = (operator)=>{
 }
 n0.addEventListener("click", (e) =>{
     arraytext.push(n0.value);
+    showText.push(n0.value);
     seearray();
     updateTextBox();
 });
 n1.addEventListener("click", (e) =>{
     arraytext.push(n1.value);
+    showText.push(n1.value);
     seearray();
     updateTextBox();
 });
 n2.addEventListener("click", (e) =>{
     arraytext.push(n2.value);
+    showText.push(n2.value);
     seearray();
     updateTextBox();
 });
 n3.addEventListener("click", (e) =>{
     arraytext.push(n3.value);
+    showText.push(n3.value);
     seearray();
     updateTextBox();
 });
 n4.addEventListener("click", (e) =>{
     arraytext.push(n4.value);
+    showText.push(n4.value);
     seearray();
     updateTextBox();
 });
 n5.addEventListener("click", (e) =>{
     arraytext.push(n5.value);
+    showText.push(n5.value);
     seearray();
     updateTextBox();
 });
 n6.addEventListener("click", (e) =>{
     arraytext.push(n6.value);
+    showText.push(n6.value);
     seearray();
     updateTextBox();
 });
 n7.addEventListener("click", (e) =>{
     arraytext.push(n7.value);
+    showText.push(n7.value);
     seearray();
     updateTextBox();
 });
 n8.addEventListener("click", (e) =>{
     arraytext.push(n8.value);
+    showText.push(n8.value);
     seearray();
     updateTextBox();
 });
 n9.addEventListener("click", (e) =>{
     arraytext.push(n9.value);
+    showText.push(n9.value);
     seearray();
     updateTextBox();
 });
 np.addEventListener("click", (e) =>{
     seearray();
+    showText.push('+');
     updateTextBox();
     test('+');
 });
 nn.addEventListener("click", (e) =>{
     seearray();
+    showText.push('-');
     updateTextBox();
     test('-');
 });
 nm.addEventListener("click", (e) =>{
     seearray();
+    showText.push('*');
     updateTextBox();
     test('*');
 });
 nd.addEventListener("click", (e) =>{
     seearray();
+    showText.push('/');
     updateTextBox();
     test('/');
 });
 b.addEventListener("click", (e) =>{
     arraytext.pop();
+    showText.pop();
     seearray();
     updateTextBox();
 });
 dot.addEventListener("click", (e) =>{
     arraytext.push(dot.value);
+    showText.push('.');
     seearray();
     updateTextBox();
 });
 c.addEventListener("click", (e) =>{
     arraytext = [];
     resuleArray = [];
+    showText = [];
     first = true;
     number = "";
     number1 = 0;
@@ -178,6 +196,7 @@ ne.addEventListener("click", (e) =>{
                 default:
                     resuleArray = [];
                     arraytext = [];
+                    showText = [];
                     number1 = 0;
                     number2 = 0;
                     number = "";
