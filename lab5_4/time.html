@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Clock</title>
+
+</head>
+
+<body onload="startClock()">
+    <div>
+        <span id="clock"></span>
+    </div>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0faff;
+            margin: 0;
+        }
+
+        div {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        span {
+            font-size: 3em;
+            font-weight: bold;
+        }
+    </style>
+    <script src="time.js"></script>
+
+</body>
+
+</html>

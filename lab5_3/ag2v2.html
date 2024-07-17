@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <button onclick="myFunction()">replace to good</button>
+    <p id="demo"></p>
+
+    <script>
+        for (let i = 0; i < 100; i = i + 1) {
+            document.getElementById("demo").innerHTML += "I am bad.<br />";
+        }
+
+        function myFunction() {
+            let demoElement = document.getElementById("demo");
+            demoElement.innerHTML = demoElement.innerHTML.replace(/bad/g, "good");
+        }
+    </script>
+
+</body>
+
+</html>
