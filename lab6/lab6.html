@@ -1,144 +1,330 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>Title</title>
-    <!-- Required meta tags -->
+  <head>
+    <title>JSONPlaceholder Posts</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-</head>
-
-<body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <style>
-        html,body{
-            height: 100%;
-            background-color: #c0c0c0;
+      html, body {
+        height: 100%;
+        background-color: rgb(247, 255, 235);
+      }
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .ROW {
+        background-color: antiquewhite;
+      }
+      @media (max-width: 576px) {
+        .table_header_post {
+          display: none;
         }
-        .center{
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .col {
+          flex: 100%;
         }
-        @media (max-width:576px) {
-            .col{
-                flex: 100%;
-            }
-            .table_header_post{
-                display: none;
-            }
-        }
+      }
     </style>
-    <!-- TOP -->
-     <div id="test" data_index="0" class="center">
-        <div class="center">
-            <div class="d-flex">
-                <div class="p-2">
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                    >
-                        Add
-                    </button>
-                    
-                </div>
-                <div class="p-2">
-                    <div class="input-group mb-3">
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            class="form-control"
-                            placeholder="Search"
-                            aria-describedby="suffixId"
-                        />
-                        <span class="input-group-text" id="suffixId">Search Post</span>
-                    </div>
-                </div>
-            </div>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-5" ,style="ROW">
+        <div class="col">
+          <input type="text" id="search" class="form-control" placeholder="Search Post" />
         </div>
-        <!--table-->
-        <div class="center">
-            <div data-items="posts" class="container">
-                <div class="table_header_post row justify-content-center align-items-center g-2 fw-bold">
-                    <div class="col">ID</div>
-                    <div class="col">Title</div>
-                    <div class="col">Body</div>
-                    <div class="col">User ID</div>
-                    <div class="col"></div>
-                </div>
-                
-                <div data-item="post" class="row justify-content-center align-items-center g-2 border-bottom">
-                    <div class="col" data-itemrow='id'>1</div>
-                    <div class="col" data-itemrow='title'>test</div>
-                    <div class="col" data-itemrow='body'>hello test</div>
-                    <div class="col" data-itemrow='userID'>10</div>
-                    <div class="col">
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar">
-                            <div class="btn-group p-2" role="group" aria-label="Button Group">
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-danger"
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                           
-                        </div>
-                        
-                    </div>
-                </div>
-                
-            </div>
-            
+        <div class="col-auto">
+          <button id="searchBtn" class="btn btn-primary">Search</button>
         </div>
-     </div>
-    
-    
-    
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <input type="text" id="title" class="form-control" placeholder="Title" />
+        </div>
+        <div class="col">
+          <input type="text" id="body" class="form-control" placeholder="Body" />
+        </div>
+        <div class="col-auto">
+          <button id="addBtn" class="btn btn-success">Add Post</button>
+        </div>
+      </div>
+      <div class="table-responsive mt-5">
+        <table class="table table-bordered">
+          <thead class="table_header_post">
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Body</th>
+              <th>UserID</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="postsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
     <script>
-        async function search() {
-            return new Promise((resolve) => {
-                fetch('https://jsonplaceholder.typicode.com/posts')
-                    .then(response => response.json())
-                    .then(json => {
-                        resolve(json);
-                    })
-                
-            });
-        }
-        async function work() {
-            const json_posts = await search();
-            const container_posts = document.querySelectorAll('div[data-items="posts"]')[0];
-            const container_post_item = container_posts.querySelectorAll('div[data-item="post"]')[0];
-            json_posts.forEach(element => {
-                const rows = container_post_item.cloneNode(true);
-                rows.querySelectorAll("div[data-itemrow='id']")[0].innerHTML = element.id;;
-                rows.querySelectorAll("div[data-itemrow='title']")[0].innerHTML = element.title;
-                rows.querySelectorAll("div[data-itemrow='body']")[0].innerHTML = element.body;
-                rows.querySelectorAll("div[data-itemrow='userID']")[0].innerHTML = element.userId;
-                container_posts.append(rows);
-            });
-        }
-        work();
-        w
+      document.addEventListener("DOMContentLoaded", () => {
+    const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+    const searchBtn = document.getElementById("searchBtn");
+    const addBtn = document.getElementById("addBtn");
+  
+    searchBtn.addEventListener("click", searchPosts);
+    addBtn.addEventListener("click", addPost);
+  
+    async function fetchPosts(query = "") {
+      const response = await fetch(apiUrl + (query ? `?q=${query}` : ""));
+      return await response.json();
+    }
+  
+    async function searchPosts() {
+      const query = document.getElementById("search").value;
+      const posts = await fetchPosts(query);
+      displayPosts(posts);
+    }
+  
+    async function addPost() {
+      const title = document.getElementById("title").value;
+      const body = document.getElementById("body").value;
+      const post = { title, body, userId: 1 };
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(post),
+      });
+      const newPost = await response.json();
+      displayPost(newPost);
+    }
+  
+    async function updatePost(id, updatedPost) {
+      const response = await fetch(`${apiUrl}/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify(updatedPost),
+      });
+      const newPost = await response.json();
+      document.getElementById(`post-${id}`).replaceWith(createPostRow(newPost));
+    }
+  
+    window.deletePost = async (id) => {
+      await fetch(`${apiUrl}/${id}`, {
+        method: "DELETE",
+      });
+      document.getElementById(`post-${id}`).remove();
+    };
+  
+    function displayPosts(posts) {
+      const postsTable = document.getElementById("postsTable");
+      postsTable.innerHTML = "";
+      posts.forEach(post => {
+        postsTable.appendChild(createPostRow(post));
+      });
+    }
+  
+    function displayPost(post) {
+      const postsTable = document.getElementById("postsTable");
+      postsTable.appendChild(createPostRow(post));
+    }
+  
+    function createPostRow(post) {
+      const row = document.createElement("tr");
+      row.id = `post-${post.id}`;
+      row.innerHTML = `
+        <td>${post.id}</td>
+        <td>${post.title}</td>
+        <td>${post.body}</td>
+        <td>${post.userId}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" onclick="editPost(${post.id})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost(${post.id})">Delete</button>
+        </td>
+      `;
+      return row;
+    }
+  
+    window.editPost = (id) => {
+      const row = document.getElementById(`post-${id}`);
+      const title = row.children[1].textContent;
+      const body = row.children[2].textContent;
+      row.innerHTML = `
+        <td>${id}</td>
+        <td><input type="text" value="${title}" id="edit-title-${id}" /></td>
+        <td><input type="text" value="${body}" id="edit-body-${id}" /></td>
+        <td>${row.children[3].textContent}</td>
+        <td>
+          <button class="btn btn-success btn-sm" onclick="savePost(${id})">Save</button>
+          <button class="btn btn-secondary btn-sm" onclick="cancelEdit(${id})">Cancel</button>
+        </td>
+      `;
+    };
+  
+    window.savePost = async (id) => {
+      const title = document.getElementById(`edit-title-${id}`).value;
+      const body = document.getElementById(`edit-body-${id}`).value;
+      await updatePost(id, { id, title, body, userId: 1 });
+    };
+  
+    window.cancelEdit = (id) => {
+      const row = document.getElementById(`post-${id}`);
+      const title = row.querySelector(`#edit-title-${id}`).value;
+      const body = row.querySelector(`#edit-body-${id}`).value;
+      row.innerHTML = `
+        <td>${id}</td>
+        <td>${title}</td>
+        <td>${body}</td>
+        <td>${row.children[3].textContent}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" onclick="editPost(${id})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePost(${id})">Delete</button>
+        </td>
+      `;
+    };
+  
+    fetchPosts().then(displayPosts);
+  });
+  
+  //       document.addEventListener("DOMContentLoaded", () => {
+  //   const apiUrl = "https://jsonplaceholder.typicode.com/posts";
+  //   const searchBtn = document.getElementById("searchBtn");
+  //   const addBtn = document.getElementById("addBtn");
+  
+  //   searchBtn.addEventListener("click", searchPosts);
+  //   addBtn.addEventListener("click", addPost);
+  
+  //   async function fetchPosts(query = "") {
+  //     const response = await fetch('https://jsonplaceholder.typicode.com/posts?' + new URLSearchParams({
+  //         title: query.toString()
+  //     }).toString());
+  //     return await response.json();
+  //   }
+  //   async function fetchPostsAll() {
+  //     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  //     return await response.json();
+  //   }
+  
+  //   async function searchPosts() {
+  //     const query = document.getElementById("search").value;
+  //     let posts = await fetchPostsAll();
+  //     if(query.value != ""){
+  //        posts = await fetchPosts(query);
+  //     }else{
+  //        posts = await fetchPostsAll();
+  //     }
+  //     displayPosts(posts);
+  //   }
+  
+  //   async function addPost() {
+  //     const title = document.getElementById("title").value;
+  //     const body = document.getElementById("body").value;
+  //     const post = { title, body, userId: 1 };
+  //     const response = await fetch(apiUrl, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //       body: JSON.stringify(post),
+  //     });
+  //     const newPost = await response.json();
+  //     displayPost(newPost);
+  //   }
+  
+  //   async function updatePost(id, updatedPost) {
+  //     const response = await fetch(`${apiUrl}/${id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-type": "application/json; charset=UTF-8",
+  //       },
+  //       body: JSON.stringify(updatedPost),
+  //     });
+  //     const newPost = await response.json();
+  //     document.getElementById(`post-${id}`).replaceWith(createPostRow(newPost));
+  //   }
+  
+  //   window.deletePost = async (id) => {
+  //     await fetch(`${apiUrl}/${id}`, {
+  //       method: "DELETE",
+  //     });
+  //     document.getElementById(`post-${id}`).remove();
+  //   };
+  
+  //   function displayPosts(posts) {
+  //     const postsTable = document.getElementById("postsTable");
+  //     postsTable.innerHTML = "";
+  //     posts.forEach(post => {
+  //       postsTable.appendChild(createPostRow(post));
+  //     });
+  //   }
+  
+  //   function displayPost(post) {
+  //     const postsTable = document.getElementById("postsTable");
+  //     postsTable.appendChild(createPostRow(post));
+  //   }
+  
+  //   function createPostRow(post) {
+  //     const row = document.createElement("tr");
+  //     row.id = `post-${post.id}`;
+  //     row.innerHTML = `
+  //       <td>${post.id}</td>
+  //       <td>${post.title}</td>
+  //       <td>${post.body}</td>
+  //       <td>${post.userId}</td>
+  //       <td>
+  //         <button class="btn btn-primary btn-sm" onclick="editPost(${post.id})">Edit</button>
+  //         <button class="btn btn-danger btn-sm" onclick="deletePost(${post.id})">Delete</button>
+  //       </td>
+  //     `;
+  //     return row;
+  //   }
+  
+  //   window.editPost = (id) => {
+  //     const row = document.getElementById(`post-${id}`);
+  //     const title = row.children[1].textContent;
+  //     const body = row.children[2].textContent;
+  //     row.innerHTML = `
+  //       <td>${id}</td>
+  //       <td><input type="text" value="${title}" id="edit-title-${id}" /></td>
+  //       <td><input type="text" value="${body}" id="edit-body-${id}" /></td>
+  //       <td>${row.children[3].textContent}</td>
+  //       <td>
+  //         <button class="btn btn-success btn-sm" onclick="savePost(${id})">Save</button>
+  //         <button class="btn btn-secondary btn-sm" onclick="cancelEdit(${id})">Cancel</button>
+  //       </td>
+  //     `;
+  //   };
+  
+  //   window.savePost = async (id) => {
+  //     const title = document.getElementById(`edit-title-${id}`).value;
+  //     const body = document.getElementById(`edit-body-${id}`).value;
+  //     await updatePost(id, { id, title, body, userId: 1 });
+  //   };
+  
+  //   window.cancelEdit = (id) => {
+  //     const row = document.getElementById(`post-${id}`);
+  //     const title = row.querySelector(`#edit-title-${id}`).value;
+  //     const body = row.querySelector(`#edit-body-${id}`).value;
+  //     row.innerHTML = `
+  //       <td>${id}</td>
+  //       <td>${title}</td>
+  //       <td>${body}</td>
+  //       <td>${row.children[3].textContent}</td>
+  //       <td>
+  //         <button class="btn btn-primary btn-sm" onclick="editPost(${id})">Edit</button>
+  //         <button class="btn btn-danger btn-sm" onclick="deletePost(${id})">Delete</button>
+  //       </td>
+  //     `;
+  //   };
+  
+  //   fetchPostsAll().then(displayPosts);
+  // });
+  
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  </body>
 </html>

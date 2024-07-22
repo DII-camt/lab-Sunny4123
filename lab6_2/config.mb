@@ -1,0 +1,11 @@
+npm init
+
+npm install express
+
+npm install --save-dev nodemon
+
+npm install express graphql-http graphql --save
+
+npm install -- save ruru
+
+npm install mariadb
